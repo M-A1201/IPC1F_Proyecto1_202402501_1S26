@@ -4,8 +4,6 @@
  */
 package InventarioTiendaRopa.views;
 
-import InventarioTiendaRopa.VistaAgregar;
-
 /**
  *
  * @author Manuel
@@ -13,7 +11,7 @@ import InventarioTiendaRopa.VistaAgregar;
 public class VistaPrincipal extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaPrincipal.class.getName());
-VistaAgregar vAgregar=new VistaAgregar();
+
     /**
      * Creates new form VistaPrincipal
      */
@@ -32,14 +30,14 @@ VistaAgregar vAgregar=new VistaAgregar();
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblMedicamentos = new javax.swing.JTable();
-        btlAgregar = new javax.swing.JButton();
+        tblTiendaRopa = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Farmacia");
+        jLabel1.setText("Tienda de ropa");
 
-        tblMedicamentos.setModel(new javax.swing.table.DefaultTableModel(
+        tblTiendaRopa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -47,7 +45,7 @@ VistaAgregar vAgregar=new VistaAgregar();
                 {null, null, null, null}
             },
             new String [] {
-                "id", "nombre", "cantidad", "caducidad"
+                "Id", "Nombre", "Cantidad", "Caducidad"
             }
         ) {
             Class[] types = new Class [] {
@@ -58,11 +56,10 @@ VistaAgregar vAgregar=new VistaAgregar();
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tblMedicamentos);
+        jScrollPane1.setViewportView(tblTiendaRopa);
 
-        btlAgregar.setBackground(new java.awt.Color(153, 255, 153));
-        btlAgregar.setText("agregar");
-        btlAgregar.addActionListener(this::btlAgregarActionPerformed);
+        jButton1.setBackground(new java.awt.Color(153, 255, 153));
+        jButton1.setText("Agregar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -70,40 +67,30 @@ VistaAgregar vAgregar=new VistaAgregar();
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(19, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(138, 138, 138)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(167, 167, 167)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(btlAgregar)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                            .addComponent(jButton1)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(16, 16, 16)
                 .addComponent(jLabel1)
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btlAgregar)
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(jButton1)
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btlAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btlAgregarActionPerformed
-vAgregar.setVisible(true);
-//this.setVisible(false);
-        
-    }//GEN-LAST:event_btlAgregarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -131,9 +118,9 @@ vAgregar.setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btlAgregar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblMedicamentos;
+    private javax.swing.JTable tblTiendaRopa;
     // End of variables declaration//GEN-END:variables
 }

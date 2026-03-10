@@ -2,14 +2,13 @@ package InventarioTiendaRopa;
 
 import InventarioTiendaRopa.views.VistaPrincipal;
 
+
 public class InventarioTiendaRopa {
 
     public static void main(String[] args) {
-
-        //creamos un objeto
-        VistaPrincipal vprincipal = new VistaPrincipal();
-        vprincipal.setVisible(true);
-
+//instanciar la vista principal
+VistaPrincipal vPrincipal = new VistaPrincipal();
+vPrincipal.setVisible(true);
     }
 
 }
