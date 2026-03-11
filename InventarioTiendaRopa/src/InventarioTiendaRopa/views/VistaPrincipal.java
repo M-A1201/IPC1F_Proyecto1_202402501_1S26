@@ -3,30 +3,37 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package InventarioTiendaRopa.views;
+
 import InventarioTiendaRopa.controllers.InventarioTiendaRopaController;
+import InventarioTiendaRopa.models.InventarioTiendaRopaModel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Manuel
  */
 public class VistaPrincipal extends javax.swing.JFrame {
-    
-   private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaPrincipal.class.getName());
 
-   //declaracion de las variables 
-   InventarioTiendaRopaController controller;
-   VistaAgregar vAgregar;
- VistaBuscar vBuscar;
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaPrincipal.class.getName());
+
+    //declaracion de las variables 
+    InventarioTiendaRopaController controller;
+    VistaAgregar vAgregar;
+    VistaBuscar vBuscar;
+    VistaRegistrarVenta vRegistrar;
+
     /**
      * Creates new form VistaPrincipal
      */
- //constructor
+    //constructor
     public VistaPrincipal() {
         initComponents();
-       
+
         //inicializar controller y las demas variables
-        controller= new InventarioTiendaRopaController();
-        vAgregar= new VistaAgregar(controller);
-        vBuscar=new VistaBuscar(controller);
+        controller = new InventarioTiendaRopaController();
+        vAgregar = new VistaAgregar(controller);
+        vBuscar = new VistaBuscar(controller);
+        vRegistrar = new VistaRegistrarVenta(controller);
     }
 
     /**
@@ -58,12 +65,16 @@ public class VistaPrincipal extends javax.swing.JFrame {
         btnBuscar.addActionListener(this::btnBuscarActionPerformed);
 
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(this::btnEliminarActionPerformed);
 
         btnRegistrar.setText("Registrar");
+        btnRegistrar.addActionListener(this::btnRegistrarActionPerformed);
 
         btnGenerar.setText("Generar");
+        btnGenerar.addActionListener(this::btnGenerarActionPerformed);
 
         btnVer.setText("Ver datos");
+        btnVer.addActionListener(this::btnVerActionPerformed);
 
         btnSalir.setText("Salir");
 
@@ -125,15 +136,70 @@ public class VistaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-    vAgregar.setVisible(true);
-    //this.setVisible(false);
+        vAgregar.setVisible(true);
+        //this.setVisible(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-       vBuscar.setVisible(true);
+        vBuscar.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        String input = JOptionPane.showInputDialog("Ingrese ID del producto a eliminar");
+
+        try {
+            int id = Integer.parseInt(input);
+            boolean eliminado = controller.eliminarProducto(id);
+
+            if (eliminado) {
+                JOptionPane.showMessageDialog(this, "Producto eliminado correctamente");
+            } else {
+                JOptionPane.showMessageDialog(this, "Producto no encontrado");
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "ID inválido");
+        }
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerActionPerformed
+    InventarioTiendaRopaModel[] inventario = controller.obtenerInventario();
+int total = controller.getContador();
+
+System.out.println("=== INVENTARIO ACTUAL ===");
+
+for (int i = 0; i < total; i++) {
+
+    System.out.println(
+        "ID: " + inventario[i].getId() +
+        " | Nombre: " + inventario[i].getNombre() +
+        " | Categoria: " + inventario[i].getCategoria() +
+        " | Cantidad: " + inventario[i].getCantidad() +
+        " | Precio: " + inventario[i].getPrecio()
+    );
+
+}
+
+System.out.println("=========================");
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVerActionPerformed
+
+    private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
+    controller.generarReporteHTML();
+JOptionPane.showMessageDialog(this, "Reporte generado correctamente");
+
+        // TODO add your handling code here:  
+    }//GEN-LAST:event_btnGenerarActionPerformed
+
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+vRegistrar.setVisible(true);        
+// TODO add your handling code here:
+    }//GEN-LAST:event_btnRegistrarActionPerformed
 
     /**
      * @param args the command line arguments

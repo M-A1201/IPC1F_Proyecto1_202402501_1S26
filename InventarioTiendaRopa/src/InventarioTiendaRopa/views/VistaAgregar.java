@@ -25,6 +25,10 @@ public class VistaAgregar extends javax.swing.JFrame {
         initComponents();
         this.controller=controller;
     }
+    
+    //agregar los compomemtes de txtId nobre categoria y cantidad
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -156,13 +160,21 @@ public class VistaAgregar extends javax.swing.JFrame {
         producto.setCategoria(categoria);
         producto.setCantidad(cantidad);
         producto.setPrecio(precio);
-
+         
         boolean agregado = controller.agregarProducto(producto);
 
         if (agregado) {
+            System.out.println("PRODUCTO AGREGADO: ");
+             System.out.println("Id: "+id);
+            System.out.println("nombre: "+nombre);
+            System.out.println("categoria: "+categoria); 
+            System.out.println("cantidad: "+cantidad);
+            System.out.println("precio: "+precio);
+            System.out.println("============================");
+          
 
             JOptionPane.showMessageDialog(this, "Producto agregado correctamente");
-
+            //limpiar campos 
             txtId.setText("");
             txtNombre.setText("");
             txtCategoria.setText("");
