@@ -167,7 +167,15 @@ public class VistaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerActionPerformed
-    InventarioTiendaRopaModel[] inventario = controller.obtenerInventario();
+  
+        JOptionPane.showMessageDialog(this,
+        "===== DATOS DEL ESTUDIANTE =====\n"
+        + "Nombre: Manuel Angel Tíu Sanic\n"
+        + "Curso: Introducción a la Programación y Computación 1\n"
+        + "Proyecto: Sistema de Inventario de Tienda de Ropa\n"
+        + "================================");
+        
+        /* InventarioTiendaRopaModel[] inventario = controller.obtenerInventario();
 int total = controller.getContador();
 
 System.out.println("=== INVENTARIO ACTUAL ===");
@@ -184,7 +192,7 @@ for (int i = 0; i < total; i++) {
 
 }
 
-System.out.println("=========================");
+System.out.println("=========================");*/
 
         // TODO add your handling code here:
     }//GEN-LAST:event_btnVerActionPerformed
