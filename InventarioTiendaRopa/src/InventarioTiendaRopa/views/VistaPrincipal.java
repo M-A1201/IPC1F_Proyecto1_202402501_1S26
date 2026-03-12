@@ -191,6 +191,7 @@ System.out.println("=========================");
 
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
     controller.generarReporteHTML();
+    controller.generarReporteVentasHTML();
 JOptionPane.showMessageDialog(this, "Reporte generado correctamente");
 
         // TODO add your handling code here:  

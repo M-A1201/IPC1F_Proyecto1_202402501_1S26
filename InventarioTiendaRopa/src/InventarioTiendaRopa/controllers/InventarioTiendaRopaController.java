@@ -42,35 +42,76 @@ public class InventarioTiendaRopaController {
     }
 
     // --- NUEVO MÉTODO: registrar venta ---
-    public boolean registrarVenta(int id, int cantidadVendida) {
-        InventarioTiendaRopaModel producto = buscarPorId(id);
+   public boolean registrarVenta(int id, int cantidadVendida) {
 
-        if (producto != null && producto.getCantidad() >= cantidadVendida) {
-            producto.setCantidad(producto.getCantidad() - cantidadVendida);
-            // Aquí luego podrías guardar la venta en un archivo si quieres
+    InventarioTiendaRopaModel producto = buscarPorId(id);
+
+    if (producto != null && producto.getCantidad() >= cantidadVendida) {
+
+        // restar stock
+        producto.setCantidad(producto.getCantidad() - cantidadVendida);
+
+        // calcular total
+        double total = producto.getPrecio() * cantidadVendida;
+
+        try {
+
+            java.io.FileWriter fw = new java.io.FileWriter("ventas.txt", true);
+            java.io.PrintWriter pw = new java.io.PrintWriter(fw);
+
+            java.text.SimpleDateFormat formato =
+                    new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
+            String fecha = formato.format(new java.util.Date());
+
+            pw.println("Producto: " + producto.getNombre());
+            pw.println("ID: " + id);
+            pw.println("Cantidad: " + cantidadVendida);
+            pw.println("Total: " + total);
+            pw.println("Fecha: " + fecha);
+            pw.println("---------------------------");
+
+            pw.close();
+
+        } catch (Exception e) {
+
+            System.out.println("Error al guardar la venta");
+
+        }
+
+        return true;
+    }
+
+    return false;
+
+   }
+   //metodo para eliminar producto
+   public boolean eliminarProducto(int id) {
+
+    for (int i = 0; i < contador; i++) {
+
+        if (inventario[i].getId() == id) {
+
+            // mover los elementos una posición atrás
+            for (int j = i; j < contador - 1; j++) {
+
+                inventario[j] = inventario[j + 1];
+
+            }
+
+            inventario[contador - 1] = null;
+            contador--;
+
             return true;
         }
 
-        return false; // No existe o stock insuficiente
     }
 
-    // AGREGAMOS EL NUEVO MÉTODO PARA ELIMINAR PRODUCTO
-    // --------------------------
-    public boolean eliminarProducto(int id) {
-        for (int i = 0; i < contador; i++) {
-            if (inventario[i].getId() == id) {
-                // Desplazar los elementos para "eliminar" el producto
-                for (int j = i; j < contador - 1; j++) {
-                    inventario[j] = inventario[j + 1];
-                }
-                inventario[contador - 1] = null; // limpiar el último espacio
-                contador--;
-                return true; // producto eliminado
-            }
-        }
-        return false; // producto no encontrado
-    }
-
+    return false;
+}
+   
+   
+   
     // metodo para obtener todos los productos
     public InventarioTiendaRopaModel[] obtenerInventario() {
         return inventario;
@@ -80,13 +121,15 @@ public class InventarioTiendaRopaController {
         return contador;
     }
     // metodo para generar reporte HTML
-
     public void generarReporteHTML() {
 
         try {
 
-            java.io.PrintWriter writer = new java.io.PrintWriter("reporteInventario.html", "UTF-8");
+        java.text.SimpleDateFormat formatoNombre = new java.text.SimpleDateFormat("dd_MM_yyyy_HH_mm_ss");
 
+String nombreArchivo = formatoNombre.format(new java.util.Date()) + "_Stock.html";
+
+java.io.PrintWriter writer = new java.io.PrintWriter(nombreArchivo, "UTF-8");
             writer.println("<html>");
             writer.println("<head>");
             writer.println("<title>Reporte de Inventario</title>");
@@ -129,6 +172,53 @@ public class InventarioTiendaRopaController {
             System.out.println("Error al generar reporte");
 
         }
+    }
+    
+     //metodo para generar reporte de venta en HTML 
+ public void generarReporteVentasHTML() {
+    try {
+
+        java.text.SimpleDateFormat formatoNombre =
+                new java.text.SimpleDateFormat("dd_MM_yyyy_HH_mm_ss");
+
+        String nombreArchivo = formatoNombre.format(new java.util.Date()) + "_Venta.html";
+
+        java.io.BufferedReader reader =new java.io.BufferedReader(new java.io.FileReader("ventas.txt"));
+
+        java.io.PrintWriter writer = new java.io.PrintWriter(nombreArchivo, "UTF-8");
+
+        writer.println("<html>");
+        writer.println("<head>");
+        writer.println("<title>Reporte de Ventas</title>");
+        writer.println("</head>");
+        writer.println("<body>");
+
+        writer.println("<h1>Historial de Ventas</h1>");
+        writer.println("<pre>");
+
+        String linea;
+
+        while ((linea = reader.readLine()) != null) {
+
+            writer.println(linea);
+
+        }
+
+        writer.println("</pre>");
+        writer.println("</body>");
+        writer.println("</html>");
+
+        reader.close();
+        writer.close();
+
+        System.out.println("Reporte de ventas generado");
+
+    } catch (Exception e) {
+
+        System.out.println("Error al generar reporte de ventas");
+
+    }
+
 
     }
 
