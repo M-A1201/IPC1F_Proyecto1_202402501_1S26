@@ -1,0 +1,6 @@
+Producto: playera rosse
+ID: 2
+Cantidad: 2
+Total: 100.0
+Fecha: 12/03/2026 16:08:49
+---------------------------

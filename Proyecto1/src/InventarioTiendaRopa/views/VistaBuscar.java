@@ -59,6 +59,7 @@ public VistaBuscar(InventarioTiendaRopaController controller) {
         jScrollPane1.setViewportView(txtResultado);
 
         btnSalir.setText("Salir");
+        btnSalir.addActionListener(this::btnSalirActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -137,6 +138,11 @@ public VistaBuscar(InventarioTiendaRopaController controller) {
         
 // TODO add your handling code here:
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+      this.setVisible(false);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     
     
